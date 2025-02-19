@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DotNET9Test.Views.Settings.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModel="clr-namespace:DotNET9Test.ViewModels.Settings"
+    Title="SettingsPage"
+    x:DataType="viewModel:SettingsPageViewModel">
+    <Grid RowDefinitions="auto,auto">
+
+
+        <Grid
+            BackgroundColor="CadetBlue"
+            HeightRequest="100"
+            WidthRequest="200">
+            <Grid.Behaviors>
+                <toolkit:TouchBehavior
+                    DefaultAnimationDuration="250"
+                    DefaultAnimationEasing="{x:Static Easing.CubicInOut}"
+                    PressedOpacity="0.6"
+                    PressedScale="0.8" />
+            </Grid.Behaviors>
+            <Label
+                HorizontalOptions="Center"
+                Text="Hello World"
+                VerticalOptions="Center" />
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            Margin="0,5"
+            BackgroundColor="CadetBlue"
+            HeightRequest="100"
+            WidthRequest="200">
+            <Grid.Behaviors>
+                <toolkit:TouchBehavior
+                    DefaultAnimationDuration="250"
+                    DefaultAnimationEasing="{x:Static Easing.CubicInOut}"
+                    PressedOpacity="0.6" />
+            </Grid.Behaviors>
+            <Label
+                HorizontalOptions="Center"
+                Text="Hello World"
+                VerticalOptions="Center" />
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:SettingsPageViewModel}}, Path=ReOrderAppShellTabBarCommand}" />
+            </Grid.GestureRecognizers>
+        </Grid>
+    </Grid>
+</ContentPage>

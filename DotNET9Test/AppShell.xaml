@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="DotNET9Test.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:activeCallsViews="clr-namespace:DotNET9Test.Views.ActiveCalls"
+    xmlns:callLogsViews="clr-namespace:DotNET9Test.Views.CallLogs"
+    xmlns:callProfilesViews="clr-namespace:DotNET9Test.Views.CallProfiles"
+    xmlns:callbacksViews="clr-namespace:DotNET9Test.Views.Callbacks"
+    xmlns:contactsViews="clr-namespace:DotNET9Test.Views.Contacts"
+    xmlns:messagesViews="clr-namespace:DotNET9Test.Views.Messages"
+    xmlns:recordedCallsViews="clr-namespace:DotNET9Test.Views.RecordedCalls"
+    xmlns:settingsViews="clr-namespace:DotNET9Test.Views.Settings"
+    xmlns:views="clr-namespace:DotNET9Test.Views.ActiveCalls"
+    xmlns:voicemailsViews="clr-namespace:DotNET9Test.Views.Voicemails"
+    Title="DotNET9Test">
+
+    <TabBar x:Name="UserTabBar">
+        <!--<Tab Title="ActiveCalls" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate activeCallsViews:ActiveCallsPage}" />
+        </Tab>
+        <Tab Title="Callbacks" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate callbacksViews:CallbacksPage}" />
+        </Tab>
+        <Tab Title="CallLogs" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate callLogsViews:CallLogsPage}" />
+        </Tab>
+        <Tab Title="CallProfiles" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate callProfilesViews:CallProfilesPage}" />
+        </Tab>
+        <Tab Title="Contacts" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate contactsViews:ContactsPage}" />
+        </Tab>
+        <Tab Title="Messages" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate messagesViews:MessagesPage}" />
+        </Tab>
+        <Tab Title="RecordedCalls" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate recordedCallsViews:RecordedCallsPage}" />
+        </Tab>
+        <Tab Title="Settings" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate settingsViews:SettingsPage}" />
+        </Tab>
+        <Tab Title="Voicemails" Icon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate voicemailsViews:VoicemailsPage}" />
+        </Tab>-->
+    </TabBar>
+
+</Shell>

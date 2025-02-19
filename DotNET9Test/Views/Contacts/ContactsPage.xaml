@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DotNET9Test.Views.Contacts.ContactsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:DotNET9Test.Models.Contacts"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModel="clr-namespace:DotNET9Test.ViewModels.Contacts"
+    Title="ContactsPage"
+    x:DataType="viewModel:ContactsPageViewModel">
+    <Grid RowDefinitions="auto,auto,*">
+
+        <Grid
+            BackgroundColor="CadetBlue"
+            HeightRequest="100"
+            WidthRequest="200">
+            <Grid.Behaviors>
+                <toolkit:TouchBehavior
+                    DefaultAnimationDuration="250"
+                    DefaultAnimationEasing="{x:Static Easing.CubicInOut}"
+                    PressedOpacity="0.6"
+                    PressedScale="0.8" />
+            </Grid.Behaviors>
+            <Label
+                HorizontalOptions="Center"
+                Text="Hello World"
+                VerticalOptions="Center" />
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            Margin="0,5"
+            BackgroundColor="CadetBlue"
+            HeightRequest="100"
+            WidthRequest="200">
+            <Grid.Behaviors>
+                <toolkit:TouchBehavior
+                    DefaultAnimationDuration="250"
+                    DefaultAnimationEasing="{x:Static Easing.CubicInOut}"
+                    PressedOpacity="0.6" />
+            </Grid.Behaviors>
+            <Label
+                HorizontalOptions="Center"
+                Text="Hello World"
+                VerticalOptions="Center" />
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:ContactsPageViewModel}}, Path=ReOrderAppShellTabBarCommand}" />
+            </Grid.GestureRecognizers>
+        </Grid>
+        <CollectionView Grid.Row="2" ItemsSource="{Binding ContactModels}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:ContactModel">
+                    <Grid
+                        Padding="10"
+                        BackgroundColor="MediumPurple"
+                        RowDefinitions="auto,auto,auto,auto,auto">
+                        <Grid
+                            Grid.Row="0"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="10">
+                            <Label Text="Call id:" />
+                            <Label Grid.Column="1" Text="{Binding CallId}" />
+                        </Grid>
+                        <Grid
+                            Grid.Row="1"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="10">
+                            <Label Text="Caller id:" />
+                            <Label Grid.Column="1" Text="{Binding CallerId}" />
+                        </Grid>
+                        <Grid
+                            Grid.Row="2"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="10">
+                            <Label Text="Reciver id:" />
+                            <Label Grid.Column="1" Text="{Binding ReciverId}" />
+                        </Grid>
+                        <Grid
+                            Grid.Row="3"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="10">
+                            <Label Text="Caller name:" />
+                            <Label Grid.Column="1" Text="{Binding CallerName}" />
+                        </Grid>
+                        <Grid
+                            Grid.Row="4"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="10">
+                            <Label Text="Reciver name:" />
+                            <Label Grid.Column="1" Text="{Binding ReciverName}" />
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
