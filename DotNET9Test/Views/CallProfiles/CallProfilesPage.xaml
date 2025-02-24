@@ -8,50 +8,52 @@
     xmlns:viewModel="clr-namespace:DotNET9Test.ViewModels.CallProfiles"
     Title="CallProfilesPage"
     x:DataType="viewModel:CallProfilesPageViewModel">
-    <CollectionView ItemsSource="{Binding CallProfileModels}">
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="model:CallProfileModel">
-                <Grid
-                    Padding="10"
-                    BackgroundColor="ForestGreen"
-                    RowDefinitions="auto,auto,auto,auto,auto">
+    <Grid>
+        <CollectionView ItemsSource="{Binding CallProfileModels}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:CallProfileModel">
                     <Grid
-                        Grid.Row="0"
-                        ColumnDefinitions="auto,auto"
-                        ColumnSpacing="10">
-                        <Label Text="Call id:" />
-                        <Label Grid.Column="1" Text="{Binding CallId}" />
+                        Padding="10"
+                        BackgroundColor="ForestGreen"
+                        RowDefinitions="auto,auto,auto,auto,auto">
+                        <Grid
+                            Grid.Row="0"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="10">
+                            <Label Text="Call id:" />
+                            <Label Grid.Column="1" Text="{Binding CallId}" />
+                        </Grid>
+                        <Grid
+                            Grid.Row="1"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="10">
+                            <Label Text="Caller id:" />
+                            <Label Grid.Column="1" Text="{Binding CallerId}" />
+                        </Grid>
+                        <Grid
+                            Grid.Row="2"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="10">
+                            <Label Text="Reciver id:" />
+                            <Label Grid.Column="1" Text="{Binding ReciverId}" />
+                        </Grid>
+                        <Grid
+                            Grid.Row="3"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="10">
+                            <Label Text="Caller name:" />
+                            <Label Grid.Column="1" Text="{Binding CallerName}" />
+                        </Grid>
+                        <Grid
+                            Grid.Row="4"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="10">
+                            <Label Text="Reciver name:" />
+                            <Label Grid.Column="1" Text="{Binding ReciverName}" />
+                        </Grid>
                     </Grid>
-                    <Grid
-                        Grid.Row="1"
-                        ColumnDefinitions="auto,auto"
-                        ColumnSpacing="10">
-                        <Label Text="Caller id:" />
-                        <Label Grid.Column="1" Text="{Binding CallerId}" />
-                    </Grid>
-                    <Grid
-                        Grid.Row="2"
-                        ColumnDefinitions="auto,auto"
-                        ColumnSpacing="10">
-                        <Label Text="Reciver id:" />
-                        <Label Grid.Column="1" Text="{Binding ReciverId}" />
-                    </Grid>
-                    <Grid
-                        Grid.Row="3"
-                        ColumnDefinitions="auto,auto"
-                        ColumnSpacing="10">
-                        <Label Text="Caller name:" />
-                        <Label Grid.Column="1" Text="{Binding CallerName}" />
-                    </Grid>
-                    <Grid
-                        Grid.Row="4"
-                        ColumnDefinitions="auto,auto"
-                        ColumnSpacing="10">
-                        <Label Text="Reciver name:" />
-                        <Label Grid.Column="1" Text="{Binding ReciverName}" />
-                    </Grid>
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

@@ -9,6 +9,7 @@ using DotNET9Test.ViewModels.Messages;
 using DotNET9Test.ViewModels.RecordedCalls;
 using DotNET9Test.ViewModels.Settings;
 using DotNET9Test.ViewModels.Voicemails;
+using DotNET9Test.Views;
 using DotNET9Test.Views.ActiveCalls;
 using DotNET9Test.Views.Callbacks;
 using DotNET9Test.Views.CallLogs;
@@ -45,6 +46,8 @@ namespace DotNET9Test
             builder.Services.AddSingletonWithShellRoute<RecordedCallsPage, RecordedCallsPageViewModel>("RecordedCallsPage");
             builder.Services.AddSingletonWithShellRoute<SettingsPage, SettingsPageViewModel>("SettingsPage");
             builder.Services.AddSingletonWithShellRoute<VoicemailsPage, VoicemailsPageViewModel>("VoicemailsPage");
+            builder.Services.AddSingletonWithShellRoute<LoadingPage, LoadingPageViewModel>("LoadingPage");
+
 
 
 #if DEBUG

@@ -8,5 +8,6 @@ public partial class ActiveCallsPage : ContentPage
 	{
 		InitializeComponent();
         BindingContext = activeCallsPageViewModel;
+		/*Thread.Sleep(1000);*/
     }
 }

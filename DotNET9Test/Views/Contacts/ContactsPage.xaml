@@ -9,7 +9,6 @@
     Title="ContactsPage"
     x:DataType="viewModel:ContactsPageViewModel">
     <Grid RowDefinitions="auto,auto,*">
-
         <Grid
             BackgroundColor="CadetBlue"
             HeightRequest="100"

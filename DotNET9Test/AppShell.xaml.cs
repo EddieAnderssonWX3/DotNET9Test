@@ -22,16 +22,31 @@ namespace DotNET9Test
 
         public async Task ReOrderTabBar()
         {
-            var TabBarItems = UserTabBar.Items.Reverse().ToList();
-            UserTabBar.Items.Clear();
-            UserTabBar.Items.Add(TabBarItems[0]);
-            await Task.Delay(10);
-            UserTabBar.Items.Clear();
+            // Step 1: Create a placeholder item
+            var placeholderTab = CreateTab("LoadingPage", "dotnet_bot.png", typeof(LoadingPage));
 
+            // Step 2: Add the placeholder at index 0
+            UserTabBar.Items.Insert(0, placeholderTab);
+
+            // Step 3: Capture existing tabs in reverse order (excluding the placeholder)
+            var TabBarItems = UserTabBar.Items.Skip(1).Reverse().ToList();
+
+            // Step 4: Remove all items except the placeholder
+            while (UserTabBar.Items.Count > 1)
+            {
+                UserTabBar.Items.RemoveAt(1); // Always remove the second item (index 1)
+            }
+
+            await Task.Delay(100);
+
+            // Step 5: Re-add all tabs in reverse order
             foreach (var i in TabBarItems)
             {
                 UserTabBar.Items.Add(i);
             }
+
+            // Step 6: Remove the placeholder tab
+            UserTabBar.Items.Remove(placeholderTab);
         }
 
         private void CreateTabs()

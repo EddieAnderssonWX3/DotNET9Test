@@ -16,10 +16,7 @@ namespace DotNET9Test.ViewModels.Contacts
         public ObservableCollection<ContactModel> contactModels = new();
         public ContactsPageViewModel()
         {
-            for (var i = 0; i < 100; i++)
-            {
-                ContactModels.Add(new(i + 3, i + 3, i + 3, "caller " + i + 3, "reciver " + i + 3));
-            }
+            
         }
 
         [RelayCommand]

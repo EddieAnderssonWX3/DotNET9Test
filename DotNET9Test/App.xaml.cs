@@ -7,12 +7,9 @@
             InitializeComponent();
         }
 
-        public AppShell myAppShell { get; set; }
-
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            myAppShell = new AppShell();
-            return new Window(myAppShell);
+            return new Window(new AppShell());
         }
     }
 }
