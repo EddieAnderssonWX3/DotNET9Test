@@ -24,7 +24,7 @@ namespace DotNET9Test.ViewModels.Settings
             if (Shell.Current is AppShell shell)
             {
 
-                await shell.ReOrderTabBar();
+                /*await shell.ReOrderTabBar();*/
 
                 for (var i = 0; i < 100; i++)
                 {

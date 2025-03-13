@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
+<simpleShell:SimpleShell
     x:Class="DotNET9Test.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -8,48 +8,268 @@
     xmlns:callProfilesViews="clr-namespace:DotNET9Test.Views.CallProfiles"
     xmlns:callbacksViews="clr-namespace:DotNET9Test.Views.Callbacks"
     xmlns:contactsViews="clr-namespace:DotNET9Test.Views.Contacts"
+    xmlns:loadingView="clr-namespace:DotNET9Test.Views"
     xmlns:messagesViews="clr-namespace:DotNET9Test.Views.Messages"
     xmlns:recordedCallsViews="clr-namespace:DotNET9Test.Views.RecordedCalls"
     xmlns:settingsViews="clr-namespace:DotNET9Test.Views.Settings"
+    xmlns:simpleShell="clr-namespace:SimpleToolkit.SimpleShell;assembly=SimpleToolkit.SimpleShell"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModel="clr-namespace:DotNET9Test.ViewModels"
     xmlns:views="clr-namespace:DotNET9Test.Views.ActiveCalls"
     xmlns:voicemailsViews="clr-namespace:DotNET9Test.Views.Voicemails"
-    Title="DotNET9Test">
+    x:Name="thisShell"
+    x:DataType="viewModel:AppShellViewModel"
+    BackgroundColor="White">
 
-    <TabBar x:Name="UserTabBar" />
-    <!--<Tab Title="ActiveCalls" Icon="dotnet_bot.png">
-    <ShellContent ContentTemplate="{DataTemplate activeCallsViews:ActiveCallsPage}" />
+
+    <!--  TOP NAV BAR  -->
+    <simpleShell:SimpleShell.Content>
+        <Grid RowDefinitions="auto, *">
+            <Grid BackgroundColor="White" HeightRequest="80">
+                <Grid
+                    BackgroundColor="Green"
+                    HeightRequest="20"
+                    IsVisible="{Binding ShowLoadingBar}"
+                    VerticalOptions="End">
+                    <Label HorizontalOptions="Center" Text="{Binding LoadingBarText}" />
+                </Grid>
+
+                <Grid
+                    ColumnDefinitions=".25*,.5*,.25*"
+                    HeightRequest="60"
+                    VerticalOptions="Start">
+                    <Grid
+                        Margin="10,5"
+                        HorizontalOptions="Start"
+                        IsVisible="{Binding ShowUser}">
+                        <Grid.Behaviors>
+                            <toolkit:TouchBehavior
+                                BindingContext="{Binding Source={x:Reference thisShell}, Path=BindingContext}"
+                                Command="{Binding GoToMyUserCommand}"
+                                DefaultAnimationDuration="250"
+                                DefaultAnimationEasing="{x:Static Easing.CubicIn}"
+                                PressedOpacity="0.6" />
+                        </Grid.Behaviors>
+                        <Border
+                            BackgroundColor="Wheat"
+                            StrokeShape="RoundRectangle 50"
+                            StrokeThickness="2">
+                            <Grid>
+                                <Image
+                                    HorizontalOptions="Center"
+                                    Source="{Binding MyUser.ProfileImage}"
+                                    VerticalOptions="Center"
+                                    WidthRequest="50" />
+                                <!--<Label Text="{Binding MyUser.Initials}" HorizontalOptions="Center" VerticalOptions="Center"/>-->
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Grid
+                        Margin="10,5"
+                        HorizontalOptions="Start"
+                        IsVisible="{Binding ShowNavBack}">
+                        <Grid.Behaviors>
+                            <toolkit:TouchBehavior
+                                BindingContext="{Binding Source={x:Reference thisShell}, Path=BindingContext}"
+                                Command="{Binding GoBackCommand}"
+                                DefaultAnimationDuration="250"
+                                DefaultAnimationEasing="{x:Static Easing.CubicIn}"
+                                PressedOpacity="0.6" />
+                        </Grid.Behaviors>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            Text="Back"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                    <Label
+                        Grid.Column="1"
+                        Margin="10,5"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        Text="{Binding TopNavBarTitle}"
+                        VerticalOptions="Center" />
+                    <Grid Grid.Column="2" ColumnDefinitions=".5*,.5*">
+                        <Grid IsVisible="{Binding ShowExtraButtonTwo}">
+                            <Grid.Behaviors>
+                                <toolkit:TouchBehavior
+                                    BindingContext="{Binding Source={x:Reference thisShell}, Path=BindingContext}"
+                                    Command="{Binding ExtraButtonTwoCommand}"
+                                    CommandParameter="{Binding ExtraButtonTwoCommandParam}"
+                                    DefaultAnimationDuration="250"
+                                    DefaultAnimationEasing="{x:Static Easing.CubicIn}"
+                                    PressedOpacity="0.6" />
+                            </Grid.Behaviors>
+                            <Image Source="{Binding ExtraButtonTwoIcon}" WidthRequest="40" />
+                        </Grid>
+                        <Grid Grid.Column="1" IsVisible="{Binding ShowExtraButtonOne}">
+                            <Grid.Behaviors>
+                                <toolkit:TouchBehavior
+                                    BindingContext="{Binding Source={x:Reference thisShell}, Path=BindingContext}"
+                                    Command="{Binding ExtraButtonOneCommand}"
+                                    CommandParameter="{Binding ExtraButtonOneCommandParam}"
+                                    DefaultAnimationDuration="250"
+                                    DefaultAnimationEasing="{x:Static Easing.CubicIn}"
+                                    PressedOpacity="0.6" />
+                            </Grid.Behaviors>
+                            <Image Source="{Binding ExtraButtonOneIcon}" WidthRequest="40" />
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+            </Grid>
+            <simpleShell:SimpleNavigationHost Grid.Row="1" />
+        </Grid>
+    </simpleShell:SimpleShell.Content>
+
+    <!--  BOTTOM TAB BAR  -->
+    <simpleShell:SimpleShell.RootPageContainer>
+        <Grid RowDefinitions="*, auto">
+            <simpleShell:SimpleNavigationHost />
+            <Grid Grid.Row="1" RowDefinitions="auto,auto">
+                <Grid
+                    BackgroundColor="White"
+                    HeightRequest="60"
+                    IsVisible="{Binding ShowCallWindow}">
+                    <Grid Padding="20,0" BackgroundColor="Wheat">
+                        <Grid
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="10"
+                            HorizontalOptions="Center">
+                            <Label
+                                FontSize="Medium"
+                                Text="#31 Eddie"
+                                VerticalOptions="Center" />
+                            <Image
+                                Grid.Column="1"
+                                HorizontalOptions="Center"
+                                Source="calllog_selected.png"
+                                VerticalOptions="Center"
+                                WidthRequest="40" />
+                            <!--<Label Text="{Binding MyUser.Initials}" HorizontalOptions="Center" VerticalOptions="Center"/>-->
+                        </Grid>
+                        <Grid.Behaviors>
+                            <toolkit:TouchBehavior
+                                DefaultAnimationDuration="250"
+                                DefaultAnimationEasing="{x:Static Easing.CubicIn}"
+                                PressedOpacity="0.6" />
+                        </Grid.Behaviors>
+                    </Grid>
+                </Grid>
+
+                <Grid
+                    Grid.Row="1"
+                    BackgroundColor="White"
+                    HeightRequest="60"
+                    RowDefinitions="auto,*">
+                    <BoxView HeightRequest="1" Color="LightGray" />
+                    <FlexLayout
+                        x:Name="tabBar"
+                        Grid.Row="1"
+                        Margin="0"
+                        AlignItems="Center"
+                        BindableLayout.ItemsSource="{Binding VisibleTabs, Source={x:Reference thisShell}}"
+                        HorizontalOptions="Center">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="BaseShellItem">
+                                <Grid
+                                    x:Name="ThisTab"
+                                    FlexLayout.Grow="1"
+                                    RowDefinitions="auto,auto">
+                                    <Grid.Behaviors>
+                                        <toolkit:TouchBehavior
+                                            BindingContext="{Binding Source={x:Reference ThisTab}, Path=BindingContext}"
+                                            Command="{Binding Source={x:Reference thisShell}, Path=BindingContext.GoToRouteCommand}"
+                                            CommandParameter="{Binding Route}"
+                                            DefaultAnimationDuration="250"
+                                            DefaultAnimationEasing="{x:Static Easing.CubicIn}"
+                                            PressedOpacity="0.6"
+                                            PressedScale="0.9" />
+                                    </Grid.Behaviors>
+                                    <Image
+                                        HeightRequest="30"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding Icon}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="30" />
+                                    <Label
+                                        Grid.Row="1"
+                                        FontSize="Micro"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Title}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+    </simpleShell:SimpleShell.RootPageContainer>
+
+    <!--  SPECIAL TAB  -->
+
+    <Tab
+        x:Name="ContactsSpecialTab"
+        Title="Contacts"
+        Icon="message_failed.png"
+        Route="ContactsTabPage">
+        <simpleShell:SimpleShell.ShellGroupContainerTemplate>
+            <DataTemplate x:DataType="ShellSection">
+                <Grid RowDefinitions="50, *">
+                    <FlexLayout
+                        Margin="0"
+                        BackgroundColor="White"
+                        BindableLayout.ItemsSource="{Binding Items}"
+                        HorizontalOptions="Center">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="BaseShellItem">
+                                <Grid FlexLayout.Grow="1" RowDefinitions="*, .1*">
+                                    <Button
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding Source={x:Reference thisShell}, Path=BindingContext.GoToRouteCommand}"
+                                        CommandParameter="{Binding Route}"
+                                        CornerRadius="0"
+                                        FontAttributes="Bold"
+                                        FontSize="Small"
+                                        Text="{Binding Title}"
+                                        TextColor="Black" />
+                                    <BoxView
+                                        Grid.Row="1"
+                                        HeightRequest="3"
+                                        IsVisible="{Binding IsEnabled}"
+                                        VerticalOptions="End"
+                                        Color="CornflowerBlue" />
+                                    <BoxView
+                                        Grid.Row="1"
+                                        HeightRequest="1"
+                                        VerticalOptions="End"
+                                        Color="LightGray" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                    <simpleShell:SimpleNavigationHost Grid.Row="1" />
+                </Grid>
+            </DataTemplate>
+        </simpleShell:SimpleShell.ShellGroupContainerTemplate>
+
+        <ShellContent
+            Title="Contacts"
+            ContentTemplate="{DataTemplate contactsViews:ContactsPage}"
+            IsEnabled="False"
+            Route="ContactsPage" />
+        <ShellContent
+            Title="Settings"
+            ContentTemplate="{DataTemplate settingsViews:SettingsPage}"
+            IsEnabled="False"
+            Route="SettingsPage" />
+        <ShellContent
+            Title="Loading"
+            ContentTemplate="{DataTemplate loadingView:LoadingPage}"
+            IsEnabled="False"
+            Route="LoadingPage" />
     </Tab>
 
-    <Tab Title="CallLogs" Icon="dotnet_bot.png">
-    <ShellContent ContentTemplate="{DataTemplate callLogsViews:CallLogsPage}" />
-    </Tab>
 
-    <Tab Title="CallProfiles" Icon="dotnet_bot.png">
-    <ShellContent ContentTemplate="{DataTemplate callProfilesViews:CallProfilesPage}" />
-    </Tab>
-
-    <Tab Title="Contacts" Icon="dotnet_bot.png">
-    <ShellContent ContentTemplate="{DataTemplate contactsViews:ContactsPage}" />
-    </Tab>
-
-    <Tab Title="Messages" Icon="dotnet_bot.png">
-    <ShellContent ContentTemplate="{DataTemplate messagesViews:MessagesPage}" />
-    </Tab>
-
-    <Tab Title="RecordedCalls" Icon="dotnet_bot.png">
-    <ShellContent ContentTemplate="{DataTemplate recordedCallsViews:RecordedCallsPage}" />
-    </Tab>
-
-    <Tab Title="Settings" Icon="dotnet_bot.png">
-    <ShellContent ContentTemplate="{DataTemplate settingsViews:SettingsPage}" />
-    </Tab>
-
-    <Tab Title="Voicemails" Icon="dotnet_bot.png">
-    <ShellContent ContentTemplate="{DataTemplate voicemailsViews:VoicemailsPage}" />
-    </Tab>
-
-    <Tab Title="Callbacks" Icon="dotnet_bot.png">
-    <ShellContent ContentTemplate="{DataTemplate callbacksViews:CallbacksPage}" Shell.NavBarIsVisible="False" />
-    </Tab>
-    </TabBar>-->
-</Shell>
+</simpleShell:SimpleShell>

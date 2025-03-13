@@ -9,4 +9,13 @@ public partial class VoicemailsPage : ContentPage
 		InitializeComponent();
         BindingContext = voicemailsPageViewModel;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (Shell.Current is AppShell shell)
+        {
+            shell.AppShellViewModel.UpdateShellTopNavBar("Voicemails", true);
+        }
+    }
 }

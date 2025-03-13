@@ -11,4 +11,13 @@ public partial class CallbacksPage : ContentPage
 		InitializeComponent();
         BindingContext = callbacksPageViewModel;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (Shell.Current is AppShell shell)
+        {
+            shell.AppShellViewModel.UpdateShellTopNavBar("Callbacks", true);
+        }
+    }
 }

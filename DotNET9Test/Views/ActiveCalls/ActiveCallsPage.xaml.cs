@@ -8,6 +8,14 @@ public partial class ActiveCallsPage : ContentPage
 	{
 		InitializeComponent();
         BindingContext = activeCallsPageViewModel;
-		/*Thread.Sleep(1000);*/
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (Shell.Current is AppShell shell)
+        {
+            shell.AppShellViewModel.UpdateShellTopNavBar("Active Calls", true);
+        }
     }
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DotNET9Test.Views.Tabs.MoreTabsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:DotNET9Test.Services"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodel="clr-namespace:DotNET9Test.ViewModels.Tabs"
+    x:Name="ThisMoreTabsPage"
+    Title="MoreTabsPage"
+    Padding="0,10,0,0"
+    x:DataType="viewmodel:MoreTabsViewModel">
+    <Grid>
+        <CollectionView
+            Grid.Row="2"
+            Margin="0,10,0,0"
+            ItemsSource="{Binding MoreTabs}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:MoreTab">
+                    <Grid
+                        x:Name="ThisMoreTab"
+                        Padding="20,5"
+                        BackgroundColor="White"
+                        ColumnDefinitions="auto,*"
+                        HeightRequest="30">
+                        <Grid.Behaviors>
+                            <toolkit:TouchBehavior
+                                BindingContext="{Binding Source={x:Reference ThisMoreTab}, Path=BindingContext}"
+                                Command="{Binding Source={x:Reference ThisMoreTabsPage}, Path=BindingContext.GoToRouteCommand}"
+                                CommandParameter="{Binding Route}"
+                                DefaultAnimationDuration="250"
+                                DefaultAnimationEasing="{x:Static Easing.CubicIn}"
+                                PressedBackgroundColor="LightGray"
+                                PressedOpacity="0.6" />
+                        </Grid.Behaviors>
+                        <Image
+                            Grid.Column="0"
+                            Source="{Binding Icon}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Margin="20,0,0,0"
+                            Text="{Binding Title}"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

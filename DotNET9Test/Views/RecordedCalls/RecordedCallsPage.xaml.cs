@@ -9,4 +9,13 @@ public partial class RecordedCallsPage : ContentPage
 		InitializeComponent();
         BindingContext = recordedCallsPageViewModel;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (Shell.Current is AppShell shell)
+        {
+            shell.AppShellViewModel.UpdateShellTopNavBar("Recorded Calls", true);
+        }
+    }
 }

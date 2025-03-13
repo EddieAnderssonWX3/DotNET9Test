@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using DotNET9Test.Popups.MoreTabs;
 using DotNET9Test.ViewModels;
 using DotNET9Test.ViewModels.ActiveCalls;
 using DotNET9Test.ViewModels.Callbacks;
@@ -8,6 +9,7 @@ using DotNET9Test.ViewModels.Contacts;
 using DotNET9Test.ViewModels.Messages;
 using DotNET9Test.ViewModels.RecordedCalls;
 using DotNET9Test.ViewModels.Settings;
+using DotNET9Test.ViewModels.Tabs;
 using DotNET9Test.ViewModels.Voicemails;
 using DotNET9Test.Views;
 using DotNET9Test.Views.ActiveCalls;
@@ -18,8 +20,10 @@ using DotNET9Test.Views.Contacts;
 using DotNET9Test.Views.Messages;
 using DotNET9Test.Views.RecordedCalls;
 using DotNET9Test.Views.Settings;
+using DotNET9Test.Views.Tabs;
 using DotNET9Test.Views.Voicemails;
 using Microsoft.Extensions.Logging;
+using SimpleToolkit.SimpleShell;
 
 namespace DotNET9Test
 {
@@ -31,6 +35,7 @@ namespace DotNET9Test
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .UseSimpleShell(false)
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -47,6 +52,8 @@ namespace DotNET9Test
             builder.Services.AddSingletonWithShellRoute<SettingsPage, SettingsPageViewModel>("SettingsPage");
             builder.Services.AddSingletonWithShellRoute<VoicemailsPage, VoicemailsPageViewModel>("VoicemailsPage");
             builder.Services.AddSingletonWithShellRoute<LoadingPage, LoadingPageViewModel>("LoadingPage");
+            builder.Services.AddTransientWithShellRoute<ContactDetailsPage, ContactDetailsViewModel>("ContactDetailsPage");
+            builder.Services.AddSingletonWithShellRoute<MoreTabsPage, MoreTabsViewModel>("MoreTabsPage");
 
 
 
